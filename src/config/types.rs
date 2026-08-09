@@ -206,7 +206,6 @@ pub struct InputData {
     // --- Native fields added in Claude Code ≥ v2.1.x ---
     // All are `Option` / have `#[serde(default)]` so deserialization stays
     // backward-compatible with older Claude Code versions.
-
     /// Pre-computed context-window statistics. Supersedes transcript-parse when present.
     #[serde(default)]
     pub context_window: Option<ContextWindowData>,

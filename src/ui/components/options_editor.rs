@@ -112,8 +112,7 @@ impl OptionsEditorComponent {
             return;
         }
         let len = self.entries.len() as i32;
-        self.selected_idx =
-            ((self.selected_idx as i32 + delta).rem_euclid(len)) as usize;
+        self.selected_idx = ((self.selected_idx as i32 + delta).rem_euclid(len)) as usize;
     }
 
     // ── Editing actions ──────────────────────────────────────────────────────

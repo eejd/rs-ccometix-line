@@ -36,11 +36,7 @@ impl Segment for CostSegment {
         // hand-editing config.toml.
         let show_burn_rate = crate::config::Config::load()
             .ok()
-            .and_then(|c| {
-                c.segments
-                    .into_iter()
-                    .find(|s| s.id == SegmentId::Cost)
-            })
+            .and_then(|c| c.segments.into_iter().find(|s| s.id == SegmentId::Cost))
             .and_then(|sc| sc.options.get("show_burn_rate").and_then(|v| v.as_bool()))
             .unwrap_or(false);
 

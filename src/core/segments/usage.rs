@@ -215,11 +215,9 @@ impl Segment for UsageSegment {
         //   "auto"         (default) — native when available, HTTP otherwise
         //   "subscription" — always use native; return None if absent
         //   "api"          — always use the HTTP path (API / Extra-Usage users)
-        let segment_config = crate::config::Config::load().ok().and_then(|c| {
-            c.segments
-                .into_iter()
-                .find(|s| s.id == SegmentId::Usage)
-        });
+        let segment_config = crate::config::Config::load()
+            .ok()
+            .and_then(|c| c.segments.into_iter().find(|s| s.id == SegmentId::Usage));
 
         let usage_mode = segment_config
             .as_ref()
@@ -243,10 +241,7 @@ impl Segment for UsageSegment {
                     let dynamic_icon = Self::get_circle_icon(seven_day_pct / 100.0);
                     let five_hour_percent = five_hour_pct.round() as u8;
                     let primary = format!("{}%", five_hour_percent);
-                    let secondary = format!(
-                        "· {}",
-                        Self::format_reset_time_epoch(resets_at_epoch)
-                    );
+                    let secondary = format!("· {}", Self::format_reset_time_epoch(resets_at_epoch));
 
                     let mut metadata = HashMap::new();
                     metadata.insert("dynamic_icon".to_string(), dynamic_icon);
